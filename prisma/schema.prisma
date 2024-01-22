@@ -16,7 +16,18 @@ model News {
   content   String
   createdAt DateTime  @default(now())
   imgUrl    String
-  updateAt  DateTime? @default(now())
+  updateAt  DateTime?
+
+  comments Comments[]
+}
+
+model Comments {
+  id        String   @id @default(uuid())
+  author    String
+  content   String
+  createdAt DateTime @default(now())
+  News      News?    @relation(fields: [newsId], references: [id], onDelete: Cascade)
+  newsId    String?
 }
 
 model Professionals {
