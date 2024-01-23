@@ -16,7 +16,8 @@ export async function CreateNews(app: FastifyInstance) {
             data: {
                 title,
                 imgUrl,
-                content
+                content,
+                createdAt: new Date()
             }
         })
 

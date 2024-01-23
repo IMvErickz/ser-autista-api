@@ -6,12 +6,15 @@ export async function UpdateNews(app: FastifyInstance) {
     app.put('/news/:id', async (req, res) => {
 
         const newsSchema = z.object({
-            id: z.string(),
             title: z.string(),
             content: z.string()
         })
 
-        const { id } = newsSchema.parse(req.params)
+        const newsId = z.object({
+            id: z.string()
+        })
+
+        const { id } = newsId.parse(req.params)
         const { title, content } = newsSchema.parse(req.body)
 
         await prisma.news.update({

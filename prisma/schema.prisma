@@ -14,7 +14,7 @@ model News {
   id        String    @id @default(uuid())
   title     String
   content   String
-  createdAt DateTime  @default(now())
+  createdAt DateTime?
   imgUrl    String
   updateAt  DateTime?
 

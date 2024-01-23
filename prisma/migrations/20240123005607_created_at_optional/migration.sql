@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "News" ALTER COLUMN "createdAt" DROP NOT NULL,
+ALTER COLUMN "createdAt" DROP DEFAULT;
