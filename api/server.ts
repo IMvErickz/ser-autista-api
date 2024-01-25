@@ -1,5 +1,7 @@
 import Fastify from 'fastify'
 import Cors from '@fastify/cors'
+import multipart from '@fastify/multipart'
+import Static from '@fastify/static'
 import { GetAllNews } from './routes/News/getAllNews'
 import { CreateNews } from './routes/News/createNews'
 import { GetNewsById } from './routes/News/getNewsById'
@@ -8,6 +10,9 @@ import { DeleteNews } from './routes/News/deleteNews'
 import { CreateComment } from './routes/Comments/createComment'
 import { GetComments } from './routes/Comments/getComments'
 import { DeleteComment } from './routes/Comments/deleteComment'
+import { resolve } from 'path'
+import { Upload } from './routes/upload/upload'
+import { GetFile } from './routes/upload/getFile'
 
 async function Main() {
     const app = Fastify({
@@ -16,6 +21,13 @@ async function Main() {
 
     await app.register(Cors, {
         origin: true
+    })
+
+    await app.register(multipart)
+
+    await app.register(require('@fastify/static'), {
+        root: resolve(__dirname, '../uploads'),
+        prefix: '/uploads'
     })
 
     await app.register(GetAllNews)
@@ -27,6 +39,9 @@ async function Main() {
     await app.register(CreateComment)
     await app.register(GetComments)
     await app.register(DeleteComment)
+
+    await app.register(Upload)
+    await app.register(GetFile)
 
     await app.listen({
         port: 3333

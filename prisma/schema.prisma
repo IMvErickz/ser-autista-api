@@ -21,6 +21,11 @@ model News {
   comments Comments[]
 }
 
+model Images {
+  id  String @id @default(uuid())
+  key String
+}
+
 model Comments {
   id        String   @id @default(uuid())
   author    String
