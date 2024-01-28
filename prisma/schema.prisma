@@ -19,11 +19,15 @@ model News {
   updateAt  DateTime?
 
   comments Comments[]
+  Images   Images?    @relation(fields: [imagesId], references: [id])
+  imagesId String?
 }
 
 model Images {
   id  String @id @default(uuid())
   key String
+
+  news News[]
 }
 
 model Comments {

@@ -4,6 +4,7 @@ import { prisma } from "../../lib/prisma";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { GetObjectCommand } from "@aws-sdk/client-s3";
 import { r2 } from "../../lib/cloudfare";
+import { imgbox } from "imgbox-js";
 
 export async function GetFile(app: FastifyInstance) {
     app.get('/upload/:id', async (req) => {
@@ -28,7 +29,9 @@ export async function GetFile(app: FastifyInstance) {
             })
         )
 
-        return { signedUrlDownload }
+        const response = imgbox(signedUrlDownload)
+
+        return response
 
     })
 }
