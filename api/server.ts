@@ -14,38 +14,37 @@ import { resolve } from 'path'
 import { Upload } from './routes/upload/upload'
 import { GetFile } from './routes/upload/getFile'
 
-async function Main() {
-    const app = Fastify({
-        logger: true
-    })
 
-    await app.register(Cors, {
-        origin: true
-    })
+const app = Fastify()
 
-    await app.register(multipart)
+app.register(Cors, {
+    origin: true
+})
 
-    await app.register(require('@fastify/static'), {
-        root: resolve(__dirname, '../uploads'),
-        prefix: '/uploads'
-    })
+app.register(multipart)
 
-    await app.register(GetAllNews)
-    await app.register(GetNewsById)
-    await app.register(CreateNews)
-    await app.register(UpdateNews)
-    await app.register(DeleteNews)
+app.register(require('@fastify/static'), {
+    root: resolve(__dirname, '../uploads'),
+    prefix: '/uploads'
+})
 
-    await app.register(CreateComment)
-    await app.register(GetComments)
-    await app.register(DeleteComment)
+app.register(GetAllNews)
+app.register(GetNewsById)
+app.register(CreateNews)
+app.register(UpdateNews)
+app.register(DeleteNews)
 
-    await app.register(Upload)
-    await app.register(GetFile)
+app.register(CreateComment)
+app.register(GetComments)
+app.register(DeleteComment)
 
-    await app.listen({
-        port: 3333
-    })
-}
+app.register(Upload)
+app.register(GetFile)
 
-Main()
+app.listen({
+    host: '0.0.0.0',
+    port: process.env.PORT ? Number(process.env.PORT) : 3333
+}).then(() => {
+    console.log('HTTP Server running')
+})
+
