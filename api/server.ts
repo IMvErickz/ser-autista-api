@@ -13,6 +13,12 @@ import { DeleteComment } from './routes/Comments/deleteComment'
 import { resolve } from 'path'
 import { Upload } from './routes/upload/upload'
 import { GetFile } from './routes/upload/getFile'
+import { CreateDoubt } from './routes/Doubt/createDoubt'
+import { GetDoubt } from './routes/Doubt/GetDoubt'
+import { CreateAnswer } from './routes/Doubt/CreateAnswer'
+import { GetAnswer } from './routes/Doubt/GetAnswer'
+import { CreateProfessional } from './routes/Professionals/CreateProfessional'
+import { GetProfessional } from './routes/Professionals/GetProfessional'
 
 
 const app = Fastify()
@@ -40,6 +46,14 @@ app.register(DeleteComment)
 
 app.register(Upload)
 app.register(GetFile)
+
+app.register(CreateDoubt)
+app.register(GetDoubt)
+app.register(CreateAnswer)
+app.register(GetAnswer)
+
+app.register(CreateProfessional)
+app.register(GetProfessional)
 
 app.listen({
     host: '0.0.0.0',
