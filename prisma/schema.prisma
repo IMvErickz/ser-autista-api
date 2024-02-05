@@ -19,7 +19,7 @@ model News {
   updateAt  DateTime?
 
   comments Comments[]
-  Images   Images?    @relation(fields: [imagesId], references: [id])
+  Images   Images?    @relation(fields: [imagesId], references: [id], onDelete: Cascade)
   imagesId String?
 }
 
@@ -39,11 +39,27 @@ model Comments {
   newsId    String?
 }
 
-model Professionals {
-  id      String  @id @default(uuid())
-  name    String
-  phone   String?
-  email   String?
-  site    String?
-  address String?
+model Doubt {
+  id        String   @id @default(uuid())
+  question  String
+  author    String
+  createdAt DateTime @default(now())
+  Answer    Answer[]
+}
+
+model Answer {
+  id      String @id @default(uuid())
+  author  String
+  content String
+  doubt   Doubt  @relation(fields: [doubtId], references: [id], onDelete: Cascade)
+  doubtId String
+}
+
+model Professional {
+  id       String  @id @default(uuid())
+  name     String
+  number   String?
+  address  String?
+  email    String?
+  imageUrl String
 }
