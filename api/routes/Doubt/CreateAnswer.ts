@@ -14,7 +14,7 @@ export async function CreateAnswer(app: FastifyInstance) {
         })
 
         const { author, content } = answertSchema.parse(req.body)
-        const { id } = doubtSchema.parse(req.body)
+        const { id } = doubtSchema.parse(req.params)
 
         await prisma.answer.create({
             data: {
