@@ -6,40 +6,52 @@ export async function CreateProfessional(app: FastifyInstance) {
     app.post('/professional', async (req, res) => {
         const ProfessionalSchema = z.object({
             name: z.string(),
-            number: z.number(),
+            number: z.string(),
             email: z.string().email().optional(),
-            address: z.string().optional()
+            address: z.string().optional(),
+            imageUrl: z.string()
         })
 
-        const { name, number, address, email } = ProfessionalSchema.parse(req.body)
+        const { name, number, address, email, imageUrl } = ProfessionalSchema.parse(req.body)
 
         if (email) {
             await prisma.professional.create({
                 data: {
                     name,
                     number,
-                    email
+                    email,
+                    imageUrl
                 }
             })
+
+            return res.status(201).send()
+
         } else if (address) {
             await prisma.professional.create({
                 data: {
                     name,
                     number,
-                    address
+                    address,
+                    imageUrl
                 }
             })
+
+            return res.status(201).send()
+
         } else {
             await prisma.professional.create({
                 data: {
                     name,
                     number,
                     address,
-                    email
+                    email,
+                    imageUrl
                 }
             })
+
+            return res.status(201).send()
+
         }
 
-        return res.status(201).send()
     })
 }
