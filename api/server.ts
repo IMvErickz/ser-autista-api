@@ -19,6 +19,7 @@ import { CreateAnswer } from './routes/Doubt/CreateAnswer'
 import { GetAnswer } from './routes/Doubt/GetAnswer'
 import { CreateProfessional } from './routes/Professionals/CreateProfessional'
 import { GetProfessional } from './routes/Professionals/GetProfessional'
+import { GetDoubtId } from './routes/Doubt/GetDoubtId'
 
 
 const app = Fastify()
@@ -51,6 +52,7 @@ app.register(CreateDoubt)
 app.register(GetDoubt)
 app.register(CreateAnswer)
 app.register(GetAnswer)
+app.register(GetDoubtId)
 
 app.register(CreateProfessional)
 app.register(GetProfessional)
