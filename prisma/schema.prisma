@@ -56,10 +56,12 @@ model Answer {
 }
 
 model Professional {
-  id       String  @id @default(uuid())
-  name     String
-  number   String?
-  address  String?
-  email    String?
-  imageUrl String
+  id          String  @id @default(uuid())
+  name        String
+  number      String?
+  address     String?
+  email       String?
+  imageUrl    String
+  specialty   String
+  description String
 }
