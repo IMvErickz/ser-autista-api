@@ -9,10 +9,12 @@ export async function CreateProfessional(app: FastifyInstance) {
             number: z.string(),
             email: z.string().email().optional(),
             address: z.string().optional(),
-            imageUrl: z.string()
+            imageUrl: z.string(),
+            specialty: z.string(),
+            description: z.string()
         })
 
-        const { name, number, address, email, imageUrl } = ProfessionalSchema.parse(req.body)
+        const { name, number, address, email, imageUrl, specialty, description } = ProfessionalSchema.parse(req.body)
 
         if (email) {
             await prisma.professional.create({
@@ -20,7 +22,9 @@ export async function CreateProfessional(app: FastifyInstance) {
                     name,
                     number,
                     email,
-                    imageUrl
+                    imageUrl,
+                    specialty,
+                    description
                 }
             })
 
@@ -32,7 +36,9 @@ export async function CreateProfessional(app: FastifyInstance) {
                     name,
                     number,
                     address,
-                    imageUrl
+                    imageUrl,
+                    specialty,
+                    description
                 }
             })
 
@@ -45,7 +51,9 @@ export async function CreateProfessional(app: FastifyInstance) {
                     number,
                     address,
                     email,
-                    imageUrl
+                    imageUrl,
+                    specialty,
+                    description
                 }
             })
 
