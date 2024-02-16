@@ -8,8 +8,8 @@ import { GetNewsById } from './routes/News/getNewsById'
 import { UpdateNews } from './routes/News/updateNews'
 import { DeleteNews } from './routes/News/deleteNews'
 import { CreateComment } from './routes/Comments/createComment'
-import { GetComments } from './routes/Comments/getComments'
 import { DeleteComment } from './routes/Comments/deleteComment'
+import { GetComments } from './routes/Comments/getComments'
 import { resolve } from 'path'
 import { Upload } from './routes/upload/upload'
 import { GetFile } from './routes/upload/getFile'
@@ -20,6 +20,7 @@ import { GetAnswer } from './routes/Doubt/GetAnswer'
 import { CreateProfessional } from './routes/Professionals/CreateProfessional'
 import { GetProfessional } from './routes/Professionals/GetProfessional'
 import { GetDoubtId } from './routes/Doubt/GetDoubtId'
+import { UpdateProfessional } from './routes/Professionals/updateProfessional'
 
 
 const app = Fastify()
@@ -56,6 +57,7 @@ app.register(GetDoubtId)
 
 app.register(CreateProfessional)
 app.register(GetProfessional)
+app.register(UpdateProfessional)
 
 app.listen({
     host: '0.0.0.0',
