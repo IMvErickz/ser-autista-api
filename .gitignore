@@ -6,3 +6,4 @@ uploads
 .vercel
 dist
 vercel.json
+.vercel
