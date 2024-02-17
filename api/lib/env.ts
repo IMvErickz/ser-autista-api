@@ -5,6 +5,7 @@ const envSchema = z.object({
     CLOUDFARE_ENDPOINT: z.string().url(),
     CLOUDFARE_ACCESS_KEY_ID: z.string(),
     CLOUDFARE_SECRET_ACCESS_KEY: z.string(),
+    RESEND_API_KEY: z.string()
 })
 
 export const env = envSchema.parse(process.env)

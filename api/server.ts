@@ -1,7 +1,6 @@
 import Fastify from 'fastify'
 import Cors from '@fastify/cors'
 import multipart from '@fastify/multipart'
-import Static from '@fastify/static'
 import { GetAllNews } from './routes/News/getAllNews'
 import { CreateNews } from './routes/News/createNews'
 import { GetNewsById } from './routes/News/getNewsById'
@@ -21,6 +20,7 @@ import { CreateProfessional } from './routes/Professionals/CreateProfessional'
 import { GetProfessional } from './routes/Professionals/GetProfessional'
 import { GetDoubtId } from './routes/Doubt/GetDoubtId'
 import { UpdateProfessional } from './routes/Professionals/updateProfessional'
+import { SendEmail } from './routes/email/send'
 
 
 const app = Fastify()
@@ -58,6 +58,8 @@ app.register(GetDoubtId)
 app.register(CreateProfessional)
 app.register(GetProfessional)
 app.register(UpdateProfessional)
+
+app.register(SendEmail)
 
 app.listen({
     host: '0.0.0.0',
