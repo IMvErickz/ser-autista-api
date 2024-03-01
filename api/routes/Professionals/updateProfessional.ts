@@ -7,9 +7,8 @@ export async function UpdateProfessional(app: FastifyInstance) {
         const ProfessionalSchema = z.object({
             name: z.string(),
             number: z.string(),
-            email: z.string().email().optional(),
-            address: z.string().optional(),
-            imageUrl: z.string(),
+            email: z.string().nullable(),
+            address: z.string().nullable(),
             specialty: z.string(),
             description: z.string()
         })
@@ -18,61 +17,25 @@ export async function UpdateProfessional(app: FastifyInstance) {
             id: z.string()
         })
 
-        const { name, number, address, email, imageUrl, specialty, description } = ProfessionalSchema.parse(req.body)
+        const { name, number, address, email, specialty, description } = ProfessionalSchema.parse(req.body)
 
         const { id } = professionalId.parse(req.params)
 
-        if (email) {
-            await prisma.professional.update({
-                where: {
-                    id: id
-                },
-                data: {
-                    name,
-                    number,
-                    email,
-                    imageUrl,
-                    specialty,
-                    description,
-                }
-            })
+        await prisma.professional.update({
+            where: {
+                id: id
+            },
+            data: {
+                name,
+                number,
+                address,
+                email,
+                specialty,
+                description
+            }
+        })
 
-            return res.status(201).send()
+        return res.send(204).send()
 
-        } else if (address) {
-            await prisma.professional.update({
-                where: {
-                    id: id
-                },
-                data: {
-                    name,
-                    number,
-                    address,
-                    imageUrl,
-                    specialty,
-                    description
-                }
-            })
-
-            return res.status(201).send()
-
-        } else {
-            await prisma.professional.update({
-                where: {
-                    id: id
-                },
-                data: {
-                    name,
-                    number,
-                    address,
-                    email,
-                    imageUrl,
-                    specialty,
-                    description
-                }
-            })
-
-            return res.status(201).send()
-        }
     })
 }
